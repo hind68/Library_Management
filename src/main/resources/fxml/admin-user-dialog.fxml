@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="14"
+      prefWidth="440"
+      styleClass="account-card">
+    <padding>
+        <Insets top="14" right="14" bottom="14" left="14"/>
+    </padding>
+    <Label text="Edit User" styleClass="modal-title"/>
+    <Label text="Update identity, role, status, and contact details without changing the password."
+           wrapText="true"
+           styleClass="modal-subtitle"/>
+    <TextField fx:id="fullNameField" promptText="Full Name" styleClass="input"/>
+    <TextField fx:id="emailField" promptText="Email" styleClass="input"/>
+    <ComboBox fx:id="roleCombo" promptText="Role" maxWidth="Infinity" styleClass="input"/>
+    <CheckBox fx:id="activeCheck" text="Active account"/>
+    <TextField fx:id="phoneField" promptText="Phone" styleClass="input"/>
+    <TextArea fx:id="addressField"
+              promptText="Address"
+              prefRowCount="3"
+              wrapText="true"
+              styleClass="input"/>
+    <Button text="Save"
+            maxWidth="Infinity"
+            onAction="#saveChanges"
+            styleClass="primary-button"/>
+</VBox>

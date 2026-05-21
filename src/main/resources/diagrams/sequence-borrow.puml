@@ -1,0 +1,14 @@
+@startuml
+actor Librarian
+participant MainController
+participant LibraryService
+participant NotificationService
+database MySQL
+Librarian -> MainController: choose member and book
+MainController -> LibraryService: borrowBook(book, member)
+LibraryService -> LibraryService: validate limit, duplicates, availability
+LibraryService -> MySQL: persist borrowing (JDBC DAO in database mode)
+LibraryService --> MainController: Borrowing
+MainController -> NotificationService: notify member
+MainController --> Librarian: success toast
+@enduml

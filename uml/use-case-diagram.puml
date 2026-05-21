@@ -1,0 +1,60 @@
+@startuml
+title Smart Library Management System - Use Case Diagram
+left to right direction
+
+actor "Administrator" as Admin
+actor "Librarian" as Librarian
+actor "Member / Student" as Member
+
+rectangle "Smart Library Management System" {
+  usecase "Login" as UC_Login
+  usecase "Logout" as UC_Logout
+  usecase "View Dashboard" as UC_Dashboard
+  usecase "Manage Users" as UC_Users
+  usecase "Register Members" as UC_Register
+  usecase "Manage Books" as UC_Books
+  usecase "Search and Filter Books" as UC_Search
+  usecase "Borrow Book" as UC_Borrow
+  usecase "Return Book" as UC_Return
+  usecase "Reserve Book" as UC_Reserve
+  usecase "View Fines" as UC_Fines
+  usecase "Send Notifications" as UC_SendNotif
+  usecase "Receive Notifications" as UC_ReceiveNotif
+  usecase "View Reports" as UC_Reports
+  usecase "View Activity Logs" as UC_Logs
+}
+
+Admin --> UC_Login
+Admin --> UC_Logout
+Admin --> UC_Dashboard
+Admin --> UC_Users
+Admin --> UC_Books
+Admin --> UC_Borrow
+Admin --> UC_Return
+Admin --> UC_SendNotif
+Admin --> UC_Reports
+Admin --> UC_Logs
+
+Librarian --> UC_Login
+Librarian --> UC_Logout
+Librarian --> UC_Dashboard
+Librarian --> UC_Register
+Librarian --> UC_Books
+Librarian --> UC_Search
+Librarian --> UC_Borrow
+Librarian --> UC_Return
+Librarian --> UC_Reserve
+Librarian --> UC_SendNotif
+
+Member --> UC_Login
+Member --> UC_Logout
+Member --> UC_Dashboard
+Member --> UC_Search
+Member --> UC_Reserve
+Member --> UC_Fines
+Member --> UC_ReceiveNotif
+
+UC_Borrow .> UC_Search : <<include>>
+UC_Return .> UC_Fines : <<extend>>
+UC_Reserve .> UC_Search : <<include>>
+@enduml

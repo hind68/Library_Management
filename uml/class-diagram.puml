@@ -1,0 +1,133 @@
+@startuml
+title Smart Library Management System - Class Diagram
+skinparam classAttributeIconSize 0
+
+package "controller" {
+  class LoginController {
+    -Stage stage
+    -UserService userService
+    -SessionManager sessionManager
+    +Parent getView()
+  }
+  class MainController {
+    -User currentUser
+    -StackPane root
+    +Parent getView()
+    -showDashboard()
+    -showBooks()
+    -showBorrowing()
+    -showUsers()
+  }
+}
+
+package "service" {
+  class UserService {
+    -UserDao userDao
+    +authenticate(email, password)
+    +createUser(name, email, password, role)
+    +toggleActive(user)
+  }
+  class LibraryService {
+    +addBook(...)
+    +updateBook(book, actor)
+    +deleteBook(book, actor)
+    +borrowBook(book, member, actor)
+    +returnBook(borrowing, actor)
+    +reserveBook(book, member, actor)
+    +dashboardStats(...)
+  }
+  class NotificationService {
+    +forUser(user)
+    +notify(user, title, message, type)
+    +broadcast(title, message, type)
+  }
+  class ReportService {
+    +generatePdfLikeReport(output)
+  }
+}
+
+package "dao" {
+  class DatabaseManager {
+    +getConnection()
+    +canConnect()
+  }
+  class UserDao
+  class BookDao
+  class BorrowingDao
+  class ReservationDao
+  class FineDao
+  class NotificationDao
+  class ActivityLogDao
+}
+
+package "model" {
+  enum Role {
+    ADMIN
+    LIBRARIAN
+    MEMBER
+  }
+  class User {
+    -id
+    -fullName
+    -email
+    -passwordHash
+    -role
+    -active
+  }
+  class Book {
+    -id
+    -title
+    -author
+    -isbn
+    -category
+    -quantity
+    -availableCopies
+    -status
+  }
+  class Borrowing {
+    -id
+    -bookId
+    -memberId
+    -borrowDate
+    -dueDate
+    -returnDate
+    -status
+  }
+  class Reservation
+  class Fine
+  class LibraryNotification
+  class ActivityLog
+  class DashboardStats
+}
+
+LoginController --> UserService
+LoginController --> MainController
+MainController --> UserService
+MainController --> LibraryService
+MainController --> NotificationService
+MainController --> ReportService
+
+UserService --> UserDao
+LibraryService --> BookDao
+LibraryService --> BorrowingDao
+LibraryService --> ReservationDao
+LibraryService --> FineDao
+LibraryService --> ActivityLogDao
+NotificationService --> NotificationDao
+
+UserDao --> DatabaseManager
+BookDao --> DatabaseManager
+BorrowingDao --> DatabaseManager
+ReservationDao --> DatabaseManager
+FineDao --> DatabaseManager
+NotificationDao --> DatabaseManager
+ActivityLogDao --> DatabaseManager
+
+User --> Role
+User "1" -- "0..*" Borrowing
+Book "1" -- "0..*" Borrowing
+User "1" -- "0..*" Reservation
+Book "1" -- "0..*" Reservation
+Borrowing "1" -- "0..1" Fine
+User "1" -- "0..*" LibraryNotification
+@enduml

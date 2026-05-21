@@ -1,0 +1,22 @@
+@startuml
+title Sequence Diagram - User Management
+actor Admin
+participant MainController
+participant UserService
+participant PasswordUtil
+participant UserDao
+database MySQL
+
+Admin -> MainController : Open Users & Staff screen
+Admin -> MainController : Submit new user form
+MainController -> UserService : createUser(name, email, password, role)
+UserService -> UserService : validate name, email, password, duplicate
+UserService -> PasswordUtil : hash(password)
+PasswordUtil --> UserService : passwordHash
+UserService -> UserDao : save(name, email, hash, role)
+UserDao -> MySQL : INSERT INTO users
+MySQL --> UserDao : generated id
+UserDao --> UserService : User
+UserService --> MainController : User created
+MainController --> Admin : Refresh table
+@enduml

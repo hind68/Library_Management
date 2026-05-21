@@ -1,0 +1,23 @@
+@startuml
+title Sequence Diagram - Login
+actor User
+participant LoginController
+participant UserService
+participant PasswordUtil
+participant SessionManager
+participant MainController
+
+User -> LoginController : Enter email and password
+LoginController -> UserService : authenticate(email, password)
+UserService -> PasswordUtil : matches(rawPassword, passwordHash)
+PasswordUtil --> UserService : true/false
+alt valid credentials
+  UserService --> LoginController : Optional<User>
+  LoginController -> SessionManager : login(user)
+  LoginController -> MainController : create role-based main view
+  MainController --> User : Dashboard displayed
+else invalid credentials
+  UserService --> LoginController : Optional.empty()
+  LoginController --> User : Show validation message
+end
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+actor Admin
+actor Librarian
+actor Member
+rectangle "Smart Library Management System" {
+  Admin --> (Manage users and librarians)
+  Admin --> (Manage books)
+  Admin --> (View dashboard reports)
+  Admin --> (Manage fines)
+  Admin --> (View system logs)
+  Librarian --> (Register members)
+  Librarian --> (Issue books)
+  Librarian --> (Return books)
+  Librarian --> (Send notifications)
+  Librarian --> (View overdue books)
+  Member --> (Search books)
+  Member --> (Reserve unavailable book)
+  Member --> (View borrow history)
+  Member --> (Receive notifications)
+}
+@enduml

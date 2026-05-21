@@ -1,0 +1,29 @@
+@startuml
+title Sequence Diagram - Returning a Book
+actor Librarian
+participant MainController
+participant LibraryService
+participant BorrowingDao
+participant BookDao
+participant FineDao
+participant ReservationDao
+database MySQL
+
+Librarian -> MainController : Select borrowing and click return
+MainController -> LibraryService : returnBook(borrowing, actor)
+LibraryService -> LibraryService : validate selection and return status
+LibraryService -> BookDao : updateAvailability(book)
+BookDao -> MySQL : UPDATE books
+LibraryService -> BorrowingDao : markReturned(borrowing)
+BorrowingDao -> MySQL : UPDATE borrowings
+alt overdue
+  LibraryService -> FineDao : save(fine)
+  FineDao -> MySQL : INSERT INTO fines
+end
+alt waiting reservation exists
+  LibraryService -> ReservationDao : updateStatus(reservation)
+  ReservationDao -> MySQL : UPDATE reservations
+end
+LibraryService --> MainController : Return completed
+MainController --> Librarian : Success toast
+@enduml

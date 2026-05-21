@@ -1,0 +1,23 @@
+@startuml
+title Sequence Diagram - Adding a New Book
+actor Admin
+participant MainController
+participant LibraryService
+participant BookDao
+participant ActivityLogDao
+database MySQL
+
+Admin -> MainController : Open Add Book dialog
+Admin -> MainController : Submit title, author, ISBN, category, quantity
+MainController -> LibraryService : addBook(...)
+LibraryService -> LibraryService : validate fields and unique ISBN
+LibraryService -> BookDao : save(book)
+BookDao -> MySQL : INSERT category if needed
+BookDao -> MySQL : INSERT INTO books
+MySQL --> BookDao : generated id
+BookDao --> LibraryService : Book
+LibraryService -> ActivityLogDao : save(actor, BOOK_CREATED, details)
+ActivityLogDao -> MySQL : INSERT INTO activity_logs
+LibraryService --> MainController : Book created
+MainController --> Admin : Success toast and refreshed table
+@enduml

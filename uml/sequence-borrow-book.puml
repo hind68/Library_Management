@@ -1,0 +1,23 @@
+@startuml
+title Sequence Diagram - Borrowing a Book
+actor Librarian
+participant MainController
+participant LibraryService
+participant BorrowingDao
+participant BookDao
+participant NotificationService
+database MySQL
+
+Librarian -> MainController : Select book and member
+MainController -> LibraryService : borrowBook(book, member, actor)
+LibraryService -> LibraryService : validate member, limit, duplicate, availability
+LibraryService -> BorrowingDao : save(borrowing, issuedBy)
+BorrowingDao -> MySQL : INSERT INTO borrowings
+MySQL --> BorrowingDao : generated id
+BorrowingDao --> LibraryService : Borrowing
+LibraryService -> BookDao : updateAvailability(book)
+BookDao -> MySQL : UPDATE books
+LibraryService --> MainController : Borrowing created
+MainController -> NotificationService : notify(member, "Book issued", ...)
+MainController --> Librarian : Success toast
+@enduml

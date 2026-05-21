@@ -1,0 +1,8 @@
+title,author,isbn,category,year,quantity,available,shelf,status
+"Designing Interfaces","Jenifer Tidwell","9781492051961","HCI",2020,5,3,"A-12","Available"
+"Clean Code","Robert C. Martin","9780132350884","Software Engineering",2008,4,2,"B-04","Available"
+"Database System Concepts","Silberschatz, Korth","9780078022159","Database",2019,3,0,"C-02","Unavailable"
+"The Design of Everyday Things","Don Norman","9780465050659","HCI",2013,6,5,"A-07","Available"
+"Effective Java","Joshua Bloch","9780134685991","Programming",2018,4,4,"B-10","Available"
+"Refactoring","Martin Fowler","9780134757599","Software Engineering",2018,2,1,"B-11","Available"
+"Head First Design Patterns","Eric Freeman, Elisabeth Robson","9780596007126","Software Engineering",2004,3,3,"B-15","Available"

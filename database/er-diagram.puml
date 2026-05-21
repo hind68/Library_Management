@@ -1,0 +1,109 @@
+@startuml
+title Smart Library Management System - ER Diagram
+
+entity "roles" as roles {
+  * id : INT <<PK>>
+  --
+  * role_name : VARCHAR <<UK>>
+  description : VARCHAR
+}
+
+entity "users" as users {
+  * id : INT <<PK>>
+  --
+  * full_name : VARCHAR
+  * email : VARCHAR <<UK>>
+  * password_hash : VARCHAR
+  * role_name : VARCHAR <<FK>>
+  * active : BOOLEAN
+  phone : VARCHAR
+  address : VARCHAR
+  created_at : TIMESTAMP
+}
+
+entity "categories" as categories {
+  * id : INT <<PK>>
+  --
+  * name : VARCHAR <<UK>>
+  description : VARCHAR
+}
+
+entity "books" as books {
+  * id : INT <<PK>>
+  --
+  * title : VARCHAR
+  * author : VARCHAR
+  * isbn : VARCHAR <<UK>>
+  * category_name : VARCHAR <<FK>>
+  * publication_year : INT
+  * quantity : INT
+  * available_copies : INT
+  * shelf_location : VARCHAR
+  * status : VARCHAR
+  cover_image_path : VARCHAR
+}
+
+entity "borrowings" as borrowings {
+  * id : INT <<PK>>
+  --
+  * book_id : INT <<FK>>
+  * member_id : INT <<FK>>
+  issued_by : INT <<FK>>
+  * borrow_date : DATE
+  * due_date : DATE
+  return_date : DATE
+  * status : VARCHAR
+}
+
+entity "reservations" as reservations {
+  * id : INT <<PK>>
+  --
+  * book_id : INT <<FK>>
+  * member_id : INT <<FK>>
+  * reservation_date : DATE
+  * status : VARCHAR
+}
+
+entity "fines" as fines {
+  * id : INT <<PK>>
+  --
+  * borrowing_id : INT <<FK>>
+  * member_id : INT <<FK>>
+  * amount : DECIMAL
+  * reason : VARCHAR
+  * status : VARCHAR
+  * created_date : DATE
+}
+
+entity "notifications" as notifications {
+  * id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  * title : VARCHAR
+  * message : VARCHAR
+  * type : VARCHAR
+  * is_read : BOOLEAN
+  created_at : TIMESTAMP
+}
+
+entity "activity_logs" as logs {
+  * id : INT <<PK>>
+  --
+  actor_id : INT <<FK>>
+  * action : VARCHAR
+  details : VARCHAR
+  created_at : TIMESTAMP
+}
+
+roles ||--o{ users
+categories ||--o{ books
+users ||--o{ borrowings : member
+users ||--o{ borrowings : staff
+books ||--o{ borrowings
+users ||--o{ reservations
+books ||--o{ reservations
+borrowings ||--o| fines
+users ||--o{ fines
+users ||--o{ notifications
+users ||--o{ logs
+@enduml
