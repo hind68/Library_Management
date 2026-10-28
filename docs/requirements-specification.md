@@ -26,7 +26,3 @@ Create a professional desktop application for library administration, librarian 
 - Search, filtering, sorting, and tables support efficient information retrieval.
 - Consistent spacing, typography, and color improve recognition and presentation quality.
 
-## Team Structure
-- Student 1: authentication, user management, JDBC/MySQL schema.
-- Student 2: catalog, borrowing, returns, reservations, fines.
-- Student 3: UI/UX, dashboards, notifications, reports, diagrams, documentation.
