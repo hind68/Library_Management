@@ -1,0 +1,10 @@
+erDiagram
+    ROLES ||--o{ USERS : assigns
+    CATEGORIES ||--o{ BOOKS : groups
+    USERS ||--o{ BORROWINGS : borrows
+    BOOKS ||--o{ BORROWINGS : issued
+    USERS ||--o{ RESERVATIONS : reserves
+    BOOKS ||--o{ RESERVATIONS : queued
+    BORROWINGS ||--o| FINES : generates
+    USERS ||--o{ NOTIFICATIONS : receives
+    USERS ||--o{ ACTIVITY_LOGS : performs

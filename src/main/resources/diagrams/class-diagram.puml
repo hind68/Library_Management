@@ -1,0 +1,19 @@
+@startuml
+class User { id; fullName; email; role; active }
+class Book { id; title; isbn; quantity; availableCopies; status }
+class Borrowing { id; borrowDate; dueDate; returnDate; status }
+class Reservation { id; reservationDate; status }
+class Fine { id; amount; reason; status }
+class LibraryService
+class UserService
+class MainController
+class LoginController
+User "1" -- "many" Borrowing
+Book "1" -- "many" Borrowing
+User "1" -- "many" Reservation
+Book "1" -- "many" Reservation
+Borrowing "1" -- "0..1" Fine
+MainController --> LibraryService
+MainController --> UserService
+LoginController --> UserService
+@enduml

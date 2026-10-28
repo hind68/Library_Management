@@ -1,0 +1,19 @@
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+target/
+tmp/
+bin/
+*.class
+books-export.csv
+
+# Local database credentials and environment overrides
+database-local.properties
+.env
+.env.*
+!.env.example
+
+# Local presentation generator contains private academic attribution
+scripts/
