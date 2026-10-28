@@ -141,7 +141,7 @@ src/main/resources/
 src/test/java/  JUnit 5 tests
 database/       Database design material
 uml/            UML diagrams
-docs/           Installation, testing and publication guides
+docs/ — Architecture, installation, testing and requirements guides
 ```
 
 ## Security notes
@@ -153,4 +153,4 @@ docs/           Installation, testing and publication guides
 
 ## Academic documentation
 
-Requirements, UML diagrams, database models and installation material are available in `requirements/`, `uml/`, `database/` and `docs/`.
+Requirements, UML diagrams, database models and installation guides are available in docs/, uml/ and database/.
