@@ -149,7 +149,7 @@ docs/           Installation, testing and publication guides
 - Passwords are stored with BCrypt; valid legacy SHA-256 hashes are upgraded after successful authentication.
 - Database credentials stay outside version control.
 - Service methods enforce critical role checks independently of JavaFX navigation.
-- The project previously contained a MySQL password in Git history. Rotate that credential and publish from a clean history by following [`docs/github-publication-checklist.md`](docs/github-publication-checklist.md).
+
 
 ## Academic documentation
 
